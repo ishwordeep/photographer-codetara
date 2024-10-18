@@ -38,8 +38,7 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6|confirmed', // confirmed means password_confirmation
-
+            'password' => 'required|string|min:6', 
         ]);
 
         if ($validator->fails()) {
@@ -53,6 +52,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'role' => 'admin',
+            'is_active' => true,
         ]);
 
 
@@ -76,7 +76,7 @@ class AuthController extends Controller
         }
 
 
-        $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->where('is_active',true)->first();
 
         if (! $user || ! Hash::check($request->password, $user->password)) {
             return response()->json([

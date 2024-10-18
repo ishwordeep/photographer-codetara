@@ -1,9 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\Admin\CategoryController;
-use App\Http\Controllers\API\Admin\ItemSuperTypeController;
 use App\Http\Controllers\API\Admin\SubcategoryController;
-use App\Http\Controllers\API\Admin\TableController;
+use App\Http\Controllers\API\Admin\SwitchActiveStatusController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Middleware\CheckSuperadmin;
 use App\Http\Middleware\CheckSuperadminOrAdmin;
@@ -55,35 +54,13 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             Route::delete('/subcategory/{id}', 'destroy');
             Route::post('/subcategory/{id}/restore', 'restore');
         });
+        Route::post('/toggle-status/{modelName}/{id}', [SwitchActiveStatusController::class, 'toggleStatus']);
 
-        Route::controller(ItemSuperTypeController::class)->group(function () {
-            Route::post('/supertype', 'store');
-            Route::get('/supertype', 'index');
-            Route::get('/supertype/trash', 'trash');
-            Route::get('/supertype/{id}', 'show');
-            Route::post('/supertype/{id}', 'update');
-            Route::delete('/supertype/{id}', 'destroy');
-            Route::post('/supertype/{id}/restore', 'restore');
-        });
-        Route::controller(ItemSuperTypeController::class)->group(function () {
-            Route::post('/type', 'store');
-            Route::get('/type', 'index');
-            Route::get('/type/trash', 'trash');
-            Route::get('/type/{id}', 'show');
-            Route::post('/type/{id}', 'update');
-            Route::delete('/type/{id}', 'destroy');
-            Route::post('/type/{id}/restore', 'restore');
-        });
 
-        Route::controller(TableController::class)->group(function () {
-            Route::post('/table', 'store');
-            Route::get('/table', 'index');
-            Route::get('/table/trash', 'trash');
-            Route::get('/table/{id}', 'show');
-            Route::post('/table/{id}', 'update');
-            Route::delete('/table/{id}', 'destroy');
-            Route::post('/table/{id}/restore', 'restore');
-        });
+      
+      
+
+      
     });
 });
 
