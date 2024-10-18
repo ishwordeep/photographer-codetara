@@ -25,21 +25,21 @@ class AuthController extends Controller
 
 
         // Check if the role is being set to admin or staff, and verify if the authenticated user is superadmin
-        if ($request->role === 'admin' || $request->role === 'staff') {
-            if (!$authUser || $authUser->role !== 'superadmin') {
-                return response()->json([
-                    'success' => false,
-                    'message' => 'Only superadmins can register admin or staff users'
-                ], 403); // Forbidden response code
-            }
+
+        if (!$authUser || $authUser->role !== 'superadmin') {
+            return response()->json([
+                'success' => false,
+                'message' => 'Only superadmins can register admin user'
+            ], 403); // Forbidden response code
         }
+
 
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed', // confirmed means password_confirmation
-            'role' => 'in:admin,customer,staff',
+            'role' => 'in:admin',
             'phone' => 'nullable|string|max:15',
 
         ]);
@@ -90,7 +90,7 @@ class AuthController extends Controller
 
 
         $token = $user->createToken('auth_token')->plainTextToken;
-        if($user->email_verified_at == null){
+        if ($user->email_verified_at == null) {
             return response()->json([
                 'status' => false,
                 'message' => 'Email address is not verified. Please verify your email address.',
