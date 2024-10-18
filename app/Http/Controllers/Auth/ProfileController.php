@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Support\Facades\Validator;
@@ -26,7 +27,6 @@ class ProfileController extends Controller
         $user = $request->user();
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
-            'phone' => 'required|string|max:15',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -37,8 +37,7 @@ class ProfileController extends Controller
         try {
 
             $user->update($request->only([
-                'name',
-                'phone'
+                'name'
             ]));
             return response()->json([
                 'success' => true,
@@ -69,7 +68,7 @@ class ProfileController extends Controller
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
-         // Check if the current password is correct
+        // Check if the current password is correct
         if (!Hash::check($request->current_password, $user->password)) {
             return response()->json([
                 'success' => false,
@@ -122,10 +121,10 @@ class ProfileController extends Controller
         try {
             if ($request->hasFile('image')) {
                 $data['image'] = storeImage($request->file('image'), 'users');
-            }else{
+            } else {
                 $data['image'] = null;
             }
-           
+
             $user->update([
                 'image' => $data['image']
             ]);
@@ -143,5 +142,37 @@ class ProfileController extends Controller
         }
     }
 
-    
+    // get all users list:
+    public function usersList(Request $request)
+    {
+        $userId = $request->user()->id;
+        try {
+            $perPage = $request->input('per_page', 10);
+            $sortBy = $request->input('sort_by', 'created_at');
+            $sortOrder = $request->input('sort_order', 'desc');
+
+            // Build the query
+            $query = User::where('id', '!=', $userId)->orderBy($sortBy, $sortOrder);
+
+            // Apply pagination
+            $items = $query->paginate($perPage);
+
+            return apiResponse([
+                'status' => true,
+                'message' => 'Users retrieved successfully',
+                'data' => [
+                    'count' => $items->count(),
+                    'rows' => UserResource::collection($items),
+                    'pagination' =>  $items->count() > 0 ? paginate($items) : null
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return apiResponse([
+                'status' => false,
+                'message' => 'An error occurred while retrieving users',
+                'errors' => $e->getMessage(),
+                'statusCode' => Response::HTTP_INTERNAL_SERVER_ERROR,
+            ]);
+        }
+    }
 }

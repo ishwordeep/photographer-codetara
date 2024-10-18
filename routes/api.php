@@ -5,6 +5,7 @@ use App\Http\Controllers\API\Admin\ItemSuperTypeController;
 use App\Http\Controllers\API\Admin\SubcategoryController;
 use App\Http\Controllers\API\Admin\TableController;
 use App\Http\Controllers\Auth\ProfileController;
+use App\Http\Middleware\CheckSuperadmin;
 use App\Http\Middleware\CheckSuperadminOrAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,10 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
             'success' => true,
             'message' => 'Protected API is working fine'
         ]);
+    });
+
+    Route::middleware([CheckSuperadmin::class])->group(function () {
+        Route::get('users-list', [ProfileController::class, 'usersList']);
     });
 
 
