@@ -13,9 +13,8 @@ use Illuminate\Http\Request;
 Route::middleware('throttle:rate-limiter')->group(function () {
 
     // Authentications
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/create-admin-staff', [AuthController::class, 'register'])->middleware(['auth:sanctum',CheckSuperadmin::class]);
-    
+    Route::post('/register', [AuthController::class, 'register'])->middleware(['auth:sanctum', CheckSuperadmin::class]);
+
     Route::post('/login', [AuthController::class, 'login']);
 });
 
@@ -23,14 +22,14 @@ Route::middleware('throttle:rate-limiter')->group(function () {
 
 // Verification of Email
 Route::get('/email/verify/{id}/{hash}', [VerificationController::class, 'verify'])
-    ->middleware(['signed','throttle:rate-limiter'])
+    ->middleware(['signed', 'throttle:rate-limiter'])
     ->name('verification.verify');
 
 
 
 //Resend Email Verification Link
 Route::post('/email/verification-notification', [VerificationController::class, 'resend'])
-    ->middleware(['auth:sanctum','throttle:rate-limiter']);
+    ->middleware(['auth:sanctum', 'throttle:rate-limiter']);
 
 
 

@@ -29,7 +29,7 @@ class AuthController extends Controller
         if (!$authUser || $authUser->role !== 'superadmin') {
             return response()->json([
                 'success' => false,
-                'message' => 'Only superadmins can register admin user'
+                'message' => 'Only superadmin can register admin user'
             ], 403); // Forbidden response code
         }
 
@@ -39,8 +39,6 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6|confirmed', // confirmed means password_confirmation
-            'role' => 'in:admin',
-            'phone' => 'nullable|string|max:15',
 
         ]);
 
@@ -54,8 +52,7 @@ class AuthController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'role' => $role,
-            'phone' => $request->phone,
+            'role' => 'admin',
         ]);
 
 
