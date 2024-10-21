@@ -87,12 +87,12 @@ class AuthController extends Controller
 
 
         $token = $user->createToken('auth_token')->plainTextToken;
-        if ($user->email_verified_at == null) {
-            return response()->json([
-                'status' => false,
-                'message' => 'Email address is not verified. Please verify your email address.',
-            ], 403);
-        }
+        // if ($user->email_verified_at == null) {
+        //     return response()->json([
+        //         'status' => false,
+        //         'message' => 'Email address is not verified. Please verify your email address.',
+        //     ], 403);
+        // }
 
         return response()->json([
             'status' => true,
