@@ -15,4 +15,20 @@ class CategoryImage extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::deleting(function ($image) {
+            $image->deleteImage();
+        });
+    }
+
+    public function deleteImage()
+    {
+        if (file_exists(public_path('storage/' . $this->image))) {
+            unlink(public_path('storage/' . $this->image));
+        }
+    }
 }

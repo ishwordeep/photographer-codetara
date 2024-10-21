@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CategoryRequest;
 use App\Http\Resources\CategoryResource;
 use App\Models\Category;
+use App\Models\CategoryImage;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -144,6 +145,21 @@ class CategoryController extends Controller
 
             // Update the category with the provided data
             $category->update($data);
+
+            if ($request->has('images')) {
+                foreach ($request->images as $image) {
+                    $cat_image = storeImage($image, 'categories');
+                    $category->images()->create(['image' => $cat_image]); // Insert each image
+                }
+            }
+
+            if (isset($request->deleted_images)) {
+                foreach ($request->deleted_images as  $val) {
+                    $categoryImage = CategoryImage::findOrFail(intval($val));
+                    $categoryImage->delete();
+                }
+            }
+
             DB::commit();
             return apiResponse([
                 'status' => true,
