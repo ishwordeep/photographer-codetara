@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Admin\CategoryController;
+use App\Http\Controllers\API\Admin\PhotographerController;
 use App\Http\Controllers\API\Admin\SubcategoryController;
 use App\Http\Controllers\API\Admin\SwitchActiveStatusController;
 use App\Http\Controllers\Auth\ProfileController;
@@ -46,15 +47,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::delete('/category/{id}', 'destroy');
             Route::post('/category/{id}/restore', 'restore');
         });
-        Route::controller(SubcategoryController::class)->group(function () {
-            Route::post('/subcategory', 'store');
-            Route::get('/subcategory', 'index');
-            Route::get('/subcategory/trash', 'trash');
-            Route::get('/subcategory/{id}', 'show');
-            Route::post('/subcategory/{id}', 'update');
-            Route::delete('/subcategory/{id}', 'destroy');
-            Route::post('/subcategory/{id}/restore', 'restore');
+        Route::controller(PhotographerController::class)->group(function () {
+            Route::post('/photographer', 'store');
+            Route::get('/photographer', 'index');
+            Route::get('/photographer/{id}', 'show');
+            Route::post('/photographer/{id}', 'update');
+            Route::delete('/photographer/{id}', 'destroy');
         });
+
+
         Route::post('/toggle-status/{modelName}/{id}', [SwitchActiveStatusController::class, 'toggleStatus']);
 
 
