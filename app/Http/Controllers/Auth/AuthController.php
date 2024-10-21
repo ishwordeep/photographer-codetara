@@ -45,7 +45,7 @@ class AuthController extends Controller
             return response()->json(['errors' => $validator->errors()], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
         // Set role to customer by default if no role is specified
-        $role = $request->role ?? 'customer';
+        // $role = $request->role ?? 'customer';
 
         $user = User::create([
             'name' => $request->name,
