@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 
 
 //Protected API Routes
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+// Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::controller(ProfileController::class)->group(function () {
         Route::get('/user', 'user');
         Route::post('/profile-update', 'profileUpdate');
