@@ -19,12 +19,13 @@ class CategoryResource extends JsonResource
             'name' => $this->name,
             'slug' => $this->slug,
             'description' => $this->description,
+            'images'=>CategoryImageResource::collection($this->images),
             'is_active' => $this->is_active,
         ];
         if($this->image){
             $data['image'] = asset('storage/'.$this->image);
         }
-
+        
         // filter null values from the array
         $data = array_filter($data, function ($value) {
             return !is_null($value);
