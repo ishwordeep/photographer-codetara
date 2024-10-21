@@ -65,8 +65,14 @@ class CategoryController extends Controller
             if ($request->hasFile('image')) {
                 $data['image'] = storeImage($request->file('image'), 'categories'); // 'categories' is the folder for storing category images
             }
-
             $category = Category::create($data);
+            if ($request->has('images')) {
+                foreach ($request->images as $image) {
+                    $cat_image = storeImage($image, 'categories'); // 'categories' is the folder for storing category images
+                    $category->images()->create(['image' => $cat_image]);
+                }
+            }
+
             DB::commit();
             return apiResponse([
                 'status' => true,

@@ -24,6 +24,11 @@ class Category extends Model
         return $this->hasMany(Subcategory::class);
     }
 
+    public function images()
+    {
+        return $this->hasMany(CategoryImage::class);
+    }
+
     protected static function boot()
     {
         parent::boot();

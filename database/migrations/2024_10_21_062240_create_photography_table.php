@@ -30,8 +30,11 @@ return new class extends Migration
         // category_images
         Schema::create('category_images', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->string('image');
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
 
 
@@ -53,6 +56,9 @@ return new class extends Migration
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
             $table->string('message')->nullable();
             $table->timestamps();
+
+            $table->foreign('availability_id')->references('id')->on('availabilities')->onDelete('cascade');
+
         });
 
         Schema::create('booking_queries', function (Blueprint $table) {
@@ -61,6 +67,8 @@ return new class extends Migration
             $table->string('question')->nullable();
             $table->string('answer')->nullable();
             $table->timestamps();
+
+            $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
         });
 
         Schema::create('messages', function (Blueprint $table) {
