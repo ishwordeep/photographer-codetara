@@ -64,4 +64,29 @@ class MessageController extends Controller
             ]);
         }
     }
+
+    public function destroy($id)
+    {
+        try {
+            $item = Message::findOrFail($id);
+            $item->delete();
+            return apiResponse([
+                'status' => true,
+                'message' => 'Message deleted successfully',
+            ]);
+        } catch (ModelNotFoundException) {
+            return apiResponse([
+                'status' => false,
+                'message' => 'Message not found',
+                'statusCode' => Response::HTTP_NOT_FOUND,
+            ]);
+        } catch (\Exception $e) {
+            return apiResponse([
+                'status' => false,
+                'message' => 'An error occurred while deleting message',
+                'errors' => $e->getMessage(),
+                'statusCode' => Response::HTTP_INTERNAL_SERVER_ERROR,
+            ]);
+        }
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Admin\CategoryController;
+use App\Http\Controllers\API\Admin\MessageController;
 use App\Http\Controllers\API\Admin\PhotographerController;
 use App\Http\Controllers\API\Admin\SubcategoryController;
 use App\Http\Controllers\API\Admin\SwitchActiveStatusController;
@@ -53,6 +54,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/photographer/{id}', 'show');
             Route::post('/photographer/{id}', 'update');
             // Route::delete('/photographer/{id}', 'destroy');
+        });
+
+        Route::controller(MessageController::class)->group(function () {
+            Route::get('/message', 'index');
+            Route::get('/message/{id}', 'show');
+            Route::delete('/message/{id}', 'destroy');
         });
 
 
