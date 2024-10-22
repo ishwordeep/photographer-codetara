@@ -87,6 +87,11 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::dropIfExists('photographers');//
+        Schema::dropIfExists('category_images');//
         Schema::dropIfExists('availabilities');
+        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('booking_queries');
+        Schema::dropIfExists('messages');//
     }
 };

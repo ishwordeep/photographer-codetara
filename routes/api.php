@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\Admin\AvailabilityController;
 use App\Http\Controllers\API\Admin\CategoryController;
 use App\Http\Controllers\API\Admin\MessageController;
 use App\Http\Controllers\API\Admin\PhotographerController;
@@ -60,6 +61,11 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/message', 'index');
             Route::get('/message/{id}', 'show');
             Route::delete('/message/{id}', 'destroy');
+        });
+
+        Route::controller(AvailabilityController::class)->group(function () {
+            Route::get('/availability', 'index');
+            Route::post('/availability', 'store');
         });
 
 
