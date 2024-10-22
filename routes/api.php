@@ -48,21 +48,15 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::post('/category/{id}/restore', 'restore');
         });
         Route::controller(PhotographerController::class)->group(function () {
-            Route::post('/photographer', 'store');
-            Route::get('/photographer', 'index');
+            // Route::post('/photographer', 'store');
+            // Route::get('/photographer', 'index');
             Route::get('/photographer/{id}', 'show');
             Route::post('/photographer/{id}', 'update');
-            Route::delete('/photographer/{id}', 'destroy');
+            // Route::delete('/photographer/{id}', 'destroy');
         });
 
 
         Route::post('/toggle-status/{modelName}/{id}', [SwitchActiveStatusController::class, 'toggleStatus']);
-
-
-      
-      
-
-      
     });
 });
 
