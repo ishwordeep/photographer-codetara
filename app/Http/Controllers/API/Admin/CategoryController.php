@@ -154,7 +154,9 @@ class CategoryController extends Controller
             }
 
             if (isset($request->deleted_images)) {
-                foreach ($request->deleted_images as  $val) {
+                // parse
+                $deletedImages= json_decode($request->deleted_images);
+                foreach ($deletedImages as  $val) {
                     $categoryImage = CategoryImage::findOrFail(intval($val));
                     $categoryImage->delete();
                 }
