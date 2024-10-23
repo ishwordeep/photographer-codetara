@@ -48,6 +48,7 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('availability_id')->nullable();
+            $table->unsignedBigInteger('category_id')->nullable();
             $table->date('date')->nullable();
             $table->string('ticket_number')->nullable();
             $table->string('name')->nullable();
@@ -59,6 +60,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->foreign('availability_id')->references('id')->on('availabilities')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
 
         });
 

@@ -25,6 +25,7 @@ class BookingController extends Controller
                 'address',
                 'message',
                 'date',
+                'category_id'
             ]);
             $data['status'] = 'pending'; // Default status is 'pending'
             // Generate a unique ticket number

@@ -25,6 +25,7 @@ class BookingResource extends JsonResource
             'status' => $this->status,
             'booked_at' => $this->created_at,
             'date' => $this->date,
+            'category' => CategoryResource::collection($this->category),
 
         ];
         return $data;

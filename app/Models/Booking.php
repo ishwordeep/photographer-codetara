@@ -17,8 +17,14 @@ class Booking extends Model
         'address',
         'status',
         'message',
+        'category_id',
         'date'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     public function availability()
     {

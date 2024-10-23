@@ -24,6 +24,11 @@ class Category extends Model
         return $this->hasMany(Subcategory::class);
     }
 
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
+
     public function images()
     {
         return $this->hasMany(CategoryImage::class);
@@ -52,5 +57,4 @@ class Category extends Model
             }
         });
     }
-
 }
