@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        
+
         $this->call(LiveSeeder::class);
 
         User::factory()->create([
@@ -59,7 +59,7 @@ class DatabaseSeeder extends Seeder
         // make seeder for booking
         DB::table('bookings')->insert([
             [
-                
+
                 'ticket_number' => 'TICKET-001',
                 'name' => 'John Doe',
                 'phone' => '08123456789',
@@ -89,6 +89,64 @@ class DatabaseSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ]
+        ]);
+
+        DB::table('availabilities')->insert([
+            [
+                'date' => '2023-10-01',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'date' => '2024-10-21',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'date' => '2024-10-22',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'date' => '2024-10-23',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'date' => '2024-10-24',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'date' => '2024-10-25',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'date' => '2024-10-26',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'date' => '2024-10-27',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'date' => '2024-10-28',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'date' => '2024-9-29',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'date' => '2024-9-30',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
