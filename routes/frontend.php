@@ -6,6 +6,7 @@
 
 // for frontend data create routes with prefix with group
 
+use App\Http\Controllers\API\Frontend\BookingController;
 use App\Http\Controllers\API\Frontend\CategoryController;
 use App\Http\Controllers\API\Frontend\MessageController;
 use App\Http\Controllers\API\Frontend\PhotographerController;
@@ -36,7 +37,7 @@ Route::prefix('frontend')->group(function () {
     //     Route::get('/availability/{id}', 'show');
     // });
 
-    // Route::controller(BookingController::class)->group(function () {
-    //     Route::post('/booking', 'store');
-    // });
+    Route::controller(BookingController::class)->group(function () {
+        Route::post('/booking', 'store');
+    });
 });

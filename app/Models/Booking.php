@@ -17,6 +17,7 @@ class Booking extends Model
         'address',
         'status',
         'message',
+        'date'
     ];
 
     public function availability()
