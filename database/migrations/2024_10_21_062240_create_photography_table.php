@@ -48,6 +48,7 @@ return new class extends Migration
         Schema::create('bookings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('availability_id')->nullable();
+            $table->date('date')->nullable();
             $table->string('ticket_number')->nullable();
             $table->string('name')->nullable();
             $table->string('phone')->nullable();

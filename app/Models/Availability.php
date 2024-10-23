@@ -10,4 +10,9 @@ class Availability extends Model
     use HasFactory;
 
     protected $fillable = ['date'];
+
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class);
+    }
 }

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\Admin\AvailabilityController;
+use App\Http\Controllers\API\Admin\BookingController;
 use App\Http\Controllers\API\Admin\CategoryController;
 use App\Http\Controllers\API\Admin\MessageController;
 use App\Http\Controllers\API\Admin\PhotographerController;
@@ -66,6 +67,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::controller(AvailabilityController::class)->group(function () {
             Route::get('/availability', 'index');
             Route::post('/availability', 'store');
+        });
+
+        // booking
+        Route::controller(BookingController::class)->group(function () {
+            Route::get('/booking', 'index');
+            Route::get('/booking/{id}', 'show');
+            Route::delete('/booking/{id}', 'destroy');
         });
 
 
