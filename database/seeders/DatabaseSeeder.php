@@ -55,5 +55,40 @@ class DatabaseSeeder extends Seeder
                 'role' => 'admin',
             ]
         ]);
+
+        // make seeder for booking
+        DB::table('bookings')->insert([
+            [
+                
+                'ticket_number' => 'TICKET-001',
+                'name' => 'John Doe',
+                'phone' => '08123456789',
+                'address' => '123, Main Street, Lagos',
+                'status' => 'approved',
+                'message' => 'Approved',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'ticket_number' => 'TICKET-002',
+                'name' => 'Jane Smith',
+                'phone' => '08123456789',
+                'address' => '123, Main Street, Lagos',
+                'status' => 'approved',
+                'message' => 'Approved',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'ticket_number' => 'TICKET-003',
+                'name' => 'James Brown',
+                'phone' => '08123456789',
+                'address' => '123, Main Street, Lagos',
+                'status' => 'approved',
+                'message' => 'Approved',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]
+        ]);
     }
 }

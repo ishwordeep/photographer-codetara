@@ -83,6 +83,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 
 
+
+
 //Public API Routes
 
 Route::get('/test', function (Request $request) {
@@ -95,3 +97,4 @@ Route::get('/test', function (Request $request) {
 
 
 require __DIR__ . '/auth.php';
+require __DIR__ . '/frontend.php';
