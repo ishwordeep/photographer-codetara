@@ -7,6 +7,7 @@
 // for frontend data create routes with prefix with group
 
 use App\Http\Controllers\API\Frontend\CategoryController;
+use App\Http\Controllers\API\Frontend\MessageController;
 use App\Http\Controllers\API\Frontend\PhotographerController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,6 +18,10 @@ Route::prefix('frontend')->group(function () {
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/category', 'index');
         Route::get('/category/{id}', 'show');
+    });
+
+    Route::controller(MessageController::class)->group(function () {
+        Route::post('/message', 'store');
     });
 
     // Route::controller(SubcategoryController::class)->group(function () {

@@ -73,6 +73,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::controller(BookingController::class)->group(function () {
             Route::get('/booking', 'index');
             Route::get('/booking/{id}', 'show');
+            Route::post('/booking/{id}', 'update');
             Route::delete('/booking/{id}', 'destroy');
         });
 

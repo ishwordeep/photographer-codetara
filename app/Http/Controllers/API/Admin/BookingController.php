@@ -137,7 +137,35 @@ class BookingController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $booking = Booking::findOrFail($id);
+            $data = $request->only([
+                'status',
+            ]);
+            $booking->update($data);
+            DB::commit();
+            return apiResponse([
+                'status' => true,
+                'message' => 'Booking updated successfully',
+                'data' => new BookingResource($booking),
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return apiResponse([
+                'status' => false,
+                'message' => 'Booking not found',
+                'statusCode' => Response::HTTP_NOT_FOUND,
+            ]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return apiResponse([
+                'status' => false,
+                'message' => 'An error occurred while updating booking',
+                'errors' => $e->getMessage(),
+                'statusCode' => Response::HTTP_INTERNAL_SERVER_ERROR,
+            ]);
+        }
+        
     }
 
     /**
