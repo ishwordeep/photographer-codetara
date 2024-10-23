@@ -16,7 +16,7 @@ class BookingResource extends JsonResource
     {
         $data = [
             'id' => $this->id,
-            'availability_id' => $this->availability_id,
+            // 'availability_id' => $this->availability_id,
             'ticket_number' => $this->ticket_number,
             'name' => $this->name,
             'phone' => $this->phone,
@@ -25,8 +25,7 @@ class BookingResource extends JsonResource
             'status' => $this->status,
             'booked_at' => $this->created_at,
             'date' => $this->date,
-            'category' => CategoryResource::collection($this->category),
-
+            'category' => new CategoryResource($this->category),
         ];
         return $data;
     }
