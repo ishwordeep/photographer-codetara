@@ -16,7 +16,7 @@ class WorkImageResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'image' => $this->image,
+            'image' => asset('storage/' . $this->image),
         ];
     }
 }

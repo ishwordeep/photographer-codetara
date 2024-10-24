@@ -11,6 +11,7 @@ use App\Http\Controllers\API\Frontend\BookingController;
 use App\Http\Controllers\API\Frontend\CategoryController;
 use App\Http\Controllers\API\Frontend\MessageController;
 use App\Http\Controllers\API\Frontend\PhotographerController;
+use App\Http\Controllers\API\Frontend\WorkController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('frontend')->group(function () {
@@ -21,6 +22,10 @@ Route::prefix('frontend')->group(function () {
         Route::get('/category', 'index');
         Route::get('/category/{id}', 'show');
         Route::get('/get-category-list', 'getCategoryList');
+    });
+    Route::controller(WorkController::class)->group(function () {
+        Route::get('/work', 'index');
+        Route::get('/work/{id}', 'show');
     });
 
     Route::controller(MessageController::class)->group(function () {
