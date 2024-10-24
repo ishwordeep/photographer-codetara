@@ -7,6 +7,7 @@ use App\Http\Controllers\API\Admin\MessageController;
 use App\Http\Controllers\API\Admin\PhotographerController;
 use App\Http\Controllers\API\Admin\SubcategoryController;
 use App\Http\Controllers\API\Admin\SwitchActiveStatusController;
+use App\Http\Controllers\API\Admin\WorkController;
 use App\Http\Controllers\Auth\ProfileController;
 use App\Http\Middleware\CheckSuperadmin;
 use App\Http\Middleware\CheckSuperadminOrAdmin;
@@ -50,6 +51,18 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::delete('/category/{id}', 'destroy');
             Route::post('/category/{id}/restore', 'restore');
         });
+
+        Route::controller(WorkController::class)->group(function () {
+            Route::post('/work', 'store');
+            // Route::get('/work', 'index');
+            // Route::get('/work/trash', 'trash');
+            // Route::get('/work/{id}', 'show');
+            // Route::post('/work/{id}', 'update');
+            // Route::delete('/work/{id}', 'destroy');
+            // Route::post('/work/{id}/restore', 'restore');
+        });
+
+
         Route::controller(PhotographerController::class)->group(function () {
             // Route::post('/photographer', 'store');
             // Route::get('/photographer', 'index');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\AvailabilityResource;
 use App\Models\Availability;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -61,6 +62,33 @@ class AvailabilityController extends Controller
             return apiResponse([
                 'status' => false,
                 'message' => 'An error occurred while creating availability',
+                'errors' => $e->getMessage(),
+                'statusCode' => Response::HTTP_INTERNAL_SERVER_ERROR,
+            ]);
+        }
+    }
+
+    public function destroy(string $id)
+    {
+        try {
+            $available = Availability::findOrFail($id);
+            $available->delete();
+
+            return apiResponse([
+                'status' => true,
+                'message' => 'Availability deleted successfully',
+            ]);
+        } catch (ModelNotFoundException $e) {
+            return apiResponse([
+                'status' => false,
+                'message' => 'Availability not found',
+                'errors' => $e->getMessage(),
+                'statusCode' => Response::HTTP_NOT_FOUND,
+            ]);
+        } catch (\Exception $e) {
+            return apiResponse([
+                'status' => false,
+                'message' => 'An error occurred while deleting availability',
                 'errors' => $e->getMessage(),
                 'statusCode' => Response::HTTP_INTERNAL_SERVER_ERROR,
             ]);
