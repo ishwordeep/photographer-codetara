@@ -10,7 +10,6 @@ class Booking extends Model
     use HasFactory;
 
     protected $fillable = [
-        'availability_id',
         'ticket_number',
         'name',
         'phone',
@@ -26,8 +25,5 @@ class Booking extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function availability()
-    {
-        return $this->belongsTo(Availability::class);
-    }
+    
 }

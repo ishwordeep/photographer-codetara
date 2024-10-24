@@ -40,7 +40,7 @@ class CategoryController extends Controller
     public function index()
     {
         try {
-            $items = Category::select('name', 'id', 'slug')->where('is_active', true)->get();
+            $items = Category::where('is_active', true)->get();
 
             return apiResponse([
                 'status' => true,

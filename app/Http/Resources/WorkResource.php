@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class BookingResource extends JsonResource
+class WorkResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -16,16 +16,19 @@ class BookingResource extends JsonResource
     {
         $data = [
             'id' => $this->id,
-            'ticket_number' => $this->ticket_number,
-            'name' => $this->name,
-            'phone' => $this->phone,
-            'address' => $this->address,
-            'message' => $this->message,
-            'status' => $this->status,
-            'booked_at' => $this->created_at,
+            'title' => $this->title,
+            'description' => $this->description,
             'date' => $this->date,
-            'category' => new CategoryResource($this->category),
+            'is_active' => $this->is_active,
+            'images' => WorkImageResource::collection($this->images),
         ];
+
+        if ($this->image) {
+            $data['image'] = asset('storage/' . $this->image);
+        }
+
+
+
         return $data;
     }
 }

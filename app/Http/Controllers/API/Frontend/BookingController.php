@@ -19,7 +19,6 @@ class BookingController extends Controller
         DB::beginTransaction();
         try {
             $data = $request->only([
-                'availability_id',
                 'name',
                 'phone',
                 'address',
