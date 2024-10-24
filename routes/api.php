@@ -80,6 +80,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::controller(AvailabilityController::class)->group(function () {
             Route::get('/availability', 'index');
             Route::post('/availability', 'store');
+            Route::delete('/availability/{id}', 'destroy');
         });
 
         // booking
