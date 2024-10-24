@@ -43,7 +43,7 @@ class WorkController extends Controller
 
     public function store(Request $request)
     {
-        DB::beginTransaction()
+        DB::beginTransaction();
         try {
             $data = $request->only(['title', 'description', 'is_active', 'date']);
 
