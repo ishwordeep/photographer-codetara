@@ -20,6 +20,7 @@ Route::prefix('frontend')->group(function () {
     Route::controller(CategoryController::class)->group(function () {
         Route::get('/category', 'index');
         Route::get('/category/{id}', 'show');
+        Route::get('/get-category-list', 'getCategoryList');
     });
 
     Route::controller(MessageController::class)->group(function () {

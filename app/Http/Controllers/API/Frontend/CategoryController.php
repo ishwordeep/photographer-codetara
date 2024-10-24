@@ -59,4 +59,27 @@ class CategoryController extends Controller
             ]);
         }
     }
+
+    public function getCategoryList()
+    {
+        try {
+            $items = Category::select('name', 'id','slug','image')->where('is_active', true)->get();
+
+            return apiResponse([
+                'status' => true,
+                'message' => 'Categories retrieved successfully',
+                'data' => [
+                    'count' => $items->count(),
+                    'rows' => CategoryResource::collection($items),
+                ]
+            ]);
+        } catch (\Exception $e) {
+            return apiResponse([
+                'status' => false,
+                'message' => 'An error occurred while retrieving categories',
+                'errors' => $e->getMessage(),
+                'statusCode' => Response::HTTP_INTERNAL_SERVER_ERROR,
+            ]);
+        }
+    }
 }
