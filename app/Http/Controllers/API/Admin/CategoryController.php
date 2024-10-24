@@ -61,6 +61,7 @@ class CategoryController extends Controller
                 'slug' => Str::slug($request->name),
                 'description' => $request->description,
                 'is_active' => $request->is_active ?? true,
+                'icon'=>$request->icon
             ];
 
             if ($request->hasFile('image')) {
@@ -128,7 +129,7 @@ class CategoryController extends Controller
         try {
             $category = Category::findOrFail($id);
 
-            $data = $request->only(['description', 'is_active']);
+            $data = $request->only(['description', 'is_active','icon']);
 
             if ($request->filled('name')) {
                 $data['name'] = $request->name;

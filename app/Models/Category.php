@@ -16,7 +16,8 @@ class Category extends Model
         'slug',
         'description',
         'image',
-        'is_active'
+        'is_active',
+        'icon'
     ];
 
     public function subcategories()

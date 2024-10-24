@@ -63,7 +63,7 @@ class CategoryController extends Controller
     public function getCategoryList()
     {
         try {
-            $items = Category::select('name', 'id','slug','image')->where('is_active', true)->get();
+            $items = Category::select('name', 'id','slug','image','icon')->where('is_active', true)->get();
 
             return apiResponse([
                 'status' => true,

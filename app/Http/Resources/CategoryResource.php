@@ -21,6 +21,7 @@ class CategoryResource extends JsonResource
             'description' => $this->description,
             'images'=>CategoryImageResource::collection($this->images),
             'is_active' => $this->is_active,
+            'icon' => $this->icon,
         ];
         if($this->image){
             $data['image'] = asset('storage/'.$this->image);
