@@ -54,7 +54,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
         Route::controller(WorkController::class)->group(function () {
             Route::post('/work', 'store');
-            // Route::get('/work', 'index');
+            Route::get('/work', 'index');
             // Route::get('/work/trash', 'trash');
             // Route::get('/work/{id}', 'show');
             // Route::post('/work/{id}', 'update');
